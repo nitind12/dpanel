@@ -156,7 +156,7 @@ CREATE TABLE `login` (
   `USERNAME_` varchar(150) NOT NULL,
   `PASSWORD_` varchar(120) NOT NULL,
   `USER_STATUS` varchar(15) NOT NULL,
-  `DEPT_` varchar(200) NOT NULL DEFAULT 'The dpanel of School',
+  `DEPT_` varchar(200) NOT NULL DEFAULT 'The Default School',
   `COURSE` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -165,8 +165,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`USERNAME_`, `PASSWORD_`, `USER_STATUS`, `DEPT_`, `COURSE`) VALUES
-('naveen', 'naveen786$#', 'adm', 'The Sun Beam School', 'School'),
-('nitin', '123', 'adm', 'The Sun Beam School', 'School');
+('naveen', 'naveen786$#', 'adm', 'The Default School', 'School'),
+('nitin', '123', 'adm', 'The Default School', 'School');
 
 -- --------------------------------------------------------
 
