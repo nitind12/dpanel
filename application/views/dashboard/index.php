@@ -7,13 +7,13 @@
 		This makes the availablility of presenting data on website on-time whenever needed. No need to wait to transfer the significant data via long channels.
 	</p>
 	<p>
-		We starts this initiation with [Faculty Profile, Managing Activities, News, Upcoming Events, Announcements].
+		We starts this initiation with [News &amp; Events, Gallery, Birthday].
 	</p>
 	<p>
 		You can also participate by your most valuable suggestions to make this portal more user-friendly and effective through e-mail provided below.<br />
 	</p>
 	<p>
-		Email your suggestions, feedback &amp; problems at: <span style="color: #0000ff">suggestions@amrapali.ac.in</span>
+		Email your suggestions, feedback &amp; problems at: <span style="color: #0000ff">ttchld@gmail.com</span>
 	</p>
 	<p>
 		Hoping positive cooperation.
@@ -25,7 +25,6 @@
 	</p>
 	<p>
 		Technical Team,<br />
-		Faculty of Computer Applications,<br />
-		Amrapali Group of Institutes
+		Teamfreelancers
 	</p>
 </div>

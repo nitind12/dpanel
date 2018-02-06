@@ -67,7 +67,7 @@
                             'autocomplete' => 'off',
                             'required' => 'required',
                             'class' => 'required form-control',
-                            'name' => 'txtStartDate_edit',
+                            'name' => 'txtStartDate',
                             'id' => 'txtStartDate',
                             'value' => $record_->DATE_START,
                             'min' => $record_->DATE_START,

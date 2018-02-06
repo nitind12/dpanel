@@ -522,8 +522,8 @@ $config['proxy_ips'] = '';
 /*
 Customized Definitions --------------------->>>>>
 */
-define('_SCHOOL_', "Amrapali Group of Institutes, Haldwani");
-define('_SCHOOL_ABREV_', "AGI");
+define('_SCHOOL_', "School Name, City");
+define('_SCHOOL_ABREV_', "SNC");
 define('__BACKTOSITE__', 'http://localhost/dpanel');
 //define('__BACKTOSITE__', 'http://www.amrapali.ac.in');
 /*

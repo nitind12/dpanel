@@ -3,18 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2017 at 07:23 PM
+-- Generation Time: Feb 06, 2018 at 07:00 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `dpanel`
@@ -116,7 +110,8 @@ CREATE TABLE `faculty` (
   `EMAIL` varchar(50) CHARACTER SET utf8 NOT NULL,
   `MOBILE` varchar(10) CHARACTER SET utf8 NOT NULL,
   `USERNAME` varchar(250) NOT NULL,
-  `STATUS` tinyint(1) NOT NULL
+  `STATUS` tinyint(1) NOT NULL,
+  `DATE_` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf16;
 
 -- --------------------------------------------------------
@@ -161,7 +156,7 @@ CREATE TABLE `login` (
   `USERNAME_` varchar(150) NOT NULL,
   `PASSWORD_` varchar(120) NOT NULL,
   `USER_STATUS` varchar(15) NOT NULL,
-  `DEPT_` varchar(200) NOT NULL DEFAULT 'The Sun Beam School',
+  `DEPT_` varchar(200) NOT NULL DEFAULT 'The dpanel of School',
   `COURSE` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -198,7 +193,9 @@ INSERT INTO `menu_1` (`ID_`, `PRE_ICON`, `MENU`, `PATH_`, `PRIORITY_`) VALUES
 (4, 'fa fa-camera fa-fw', 'News', 'newsevents', 4),
 (5, 'fa fa-camera fa-fw', 'Upcoming Events', 'upcoming', 5),
 (6, 'fa fa-camera fa-fw', 'Announcements', 'announcements', 6),
-(7, 'fa fa-user fa-fw', 'Faculty Sequence', 'faculty/sequence', 2);
+(7, 'fa fa-user fa-fw', 'Faculty Sequence', 'faculty/sequence', 2),
+(8, 'fa fa-camera fa-fw', 'Birthdays', 'bday/bday', 7),
+(9, 'fa fa-camera fa-fw', 'TC', 'tc', 8);
 
 -- --------------------------------------------------------
 
@@ -262,6 +259,42 @@ CREATE TABLE `newsletter` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tc_paths`
+--
+
+CREATE TABLE `tc_paths` (
+  `ID` int(11) NOT NULL,
+  `TCID` int(11) NOT NULL,
+  `TC_NO` varchar(25) NOT NULL,
+  `ATTACH_PATH` varchar(100) NOT NULL,
+  `DATE_` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `STATUS_` tinyint(1) NOT NULL,
+  `USERNAME_` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transfer_certificate`
+--
+
+CREATE TABLE `transfer_certificate` (
+  `TCID` int(11) NOT NULL,
+  `TC_NO` varchar(25) NOT NULL,
+  `ROLLNO` varchar(25) NOT NULL,
+  `FNAME` varchar(30) NOT NULL,
+  `MNAME` varchar(30) NOT NULL,
+  `LNAME` varchar(30) NOT NULL,
+  `ADMISSION_DATE` varchar(25) NOT NULL,
+  `ADMISSION_CLASS` varchar(10) NOT NULL,
+  `LEAVING_DATE` varchar(25) NOT NULL,
+  `LEAVING_CLASS` varchar(10) NOT NULL,
+  `USERNAME_` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table is used to store the TC detail & fast retrieval';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `upcoming`
 --
 
@@ -301,7 +334,9 @@ INSERT INTO `user_menu` (`ID`, `MENU`, `USER_`) VALUES
 (4, 4, 'adm'),
 (5, 5, 'adm'),
 (6, 6, 'adm'),
-(7, 7, 'adm');
+(7, 7, 'adm'),
+(8, 8, 'adm'),
+(9, 9, 'adm');
 
 -- --------------------------------------------------------
 
@@ -409,6 +444,21 @@ ALTER TABLE `newsletter`
   ADD KEY `USERNAME_` (`USERNAME_`);
 
 --
+-- Indexes for table `tc_paths`
+--
+ALTER TABLE `tc_paths`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `TCID` (`TCID`),
+  ADD KEY `USERNAME_` (`USERNAME_`);
+
+--
+-- Indexes for table `transfer_certificate`
+--
+ALTER TABLE `transfer_certificate`
+  ADD PRIMARY KEY (`TCID`),
+  ADD KEY `USERNAME_` (`USERNAME_`);
+
+--
 -- Indexes for table `upcoming`
 --
 ALTER TABLE `upcoming`
@@ -447,7 +497,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `bday_data`
 --
 ALTER TABLE `bday_data`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `downloads`
 --
@@ -467,7 +517,7 @@ ALTER TABLE `gallery_category`
 -- AUTO_INCREMENT for table `menu_1`
 --
 ALTER TABLE `menu_1`
-  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `newsevents`
 --
@@ -479,6 +529,16 @@ ALTER TABLE `newsevents`
 ALTER TABLE `newsletter`
   MODIFY `NID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tc_paths`
+--
+ALTER TABLE `tc_paths`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `transfer_certificate`
+--
+ALTER TABLE `transfer_certificate`
+  MODIFY `TCID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
 -- AUTO_INCREMENT for table `upcoming`
 --
 ALTER TABLE `upcoming`
@@ -487,7 +547,7 @@ ALTER TABLE `upcoming`
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
@@ -498,7 +558,3 @@ ALTER TABLE `user_menu`
 ALTER TABLE `user_menu`
   ADD CONSTRAINT `fk_mennu` FOREIGN KEY (`MENU`) REFERENCES `menu_1` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`USER_`) REFERENCES `menu_user_status` (`ST_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

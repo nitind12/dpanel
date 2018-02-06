@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12" style="padding: 20px; color: #ffffff; text-align: center;">
-            <h5><b>dPanel</b><br />Amrapali Group of Institutes</h5>
+            <h5><b>dPanel</b><br /><?php echo _SCHOOL_; ?></h5>
         </div>
     </div>
     <div class="row">
@@ -60,7 +60,7 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4" style="padding: 20px; color: #ffffff; text-align: center;">
-            <h4>Caution:</h4><h5><b>Please close [www.amrapali.ac.in] from any tab of the current browser if you want to log-in to this dPanel.</b></h5>
+            <h4>Caution:</h4><h5><b>Please close [<?php echo __BACKTOSITE__;?>] from any tab of the current browser if you want to log-in to this dPanel.</b></h5>
         </div>
         <div class="col-lg-4"></div>
     </div>
