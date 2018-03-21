@@ -188,4 +188,12 @@ class My_model_bday extends CI_Model {
         }
         return $bool_;
     }
+
+    function active_deactive_bday($bid__, $status_){
+        $this->db->where('BID', $bid__);
+        $data = array(
+            'STATUS' => $status_
+        );
+        $this->db->update('bday_data', $data);
+    }
 }
