@@ -164,7 +164,7 @@ class My_model_toppers extends CI_Model {
         return $query;
     }
 
-    function delete_news_toppers($id_) {
+    function delete_toppers($id_) {
         if($this->session->userdata('stss_') != 'adm') $this->db->where('USERNAME', $this->session->userdata('ussr_'));
         $this->db->where('SNO', $id_);
         $query = $this->db->get('toppers');

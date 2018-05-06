@@ -24,7 +24,7 @@
                                 <?php echo $item->NEWS;?>
                                 <br />
                                 <?php if($item->PATH_ATTACH != 'x'){ ?>
-                                <a style="font-size: 10px; color: #0000ff" href="<?php echo base_url('_assets_/newsdetail/'.$item->PHOTO_);?>" target="_blank">[ Attachment ]</a>
+                                <a style="font-size: 10px; color: #0000ff" href="<?php echo base_url('_assets_/newsdetail/'.$item->PATH_ATTACH);?>" target="_blank">[ Attachment ]</a>
                                 <?php } ?>
                             </div>
                         </div>

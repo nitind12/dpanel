@@ -72,6 +72,15 @@ class Topper extends CI_Controller {
         $this->session->set_flashdata('feed_msg_', $res_['msg_']);
         redirect('topper/edit_topper/' . $id__);
     }
+    function delete_topper($id_) {
+        $res_ = $this->mmtprs->delete_toppers($id_);
+        if ($res_ == TRUE) {
+            $this->session->set_flashdata('error_msg_', 'Topper Deleted Successfully');
+        } else {
+            $this->session->set_flashdata('error_msg_', 'Something went wrong. Please try again !!');
+        }
+        redirect('topper');
+    }
     function delete_attachment($id__){
     	$res_ = $this->mmtprs->delete_attach_topperphoto($id__);
 
