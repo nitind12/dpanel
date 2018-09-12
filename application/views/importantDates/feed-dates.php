@@ -74,7 +74,7 @@
                         );
                         echo form_textarea($data);
                         ?>
-                        <input type="hidden" value='' name="impdatesid" id="impdatesid">
+                        <input type="hidden" value='' name="id" id="impdatesid">
                     </div>
                     
                     <div class="form-group col-sm-6">
@@ -84,7 +84,7 @@
                     </div>
                     <?php echo form_close(); ?>
                     <div class="form-group col-sm-6">
-                        <div style="text-align: right;  color: #ff0000; font-weight: bold; font-style: italic; padding: 5px">
+                        <div style="text-align: right;  color: #ff0000; font-weight: bold; font-style: italic; padding: 5px" id="_msg_">
                             <?php echo $this->session->flashdata('feed_msg_'); ?>
                         </div>
                     </div>

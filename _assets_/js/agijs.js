@@ -111,32 +111,37 @@ $(function(){
     	var arr = str.split('_');
     	if(arr[0] == 'edit'){
     		var url_ = site_url_ + "/ImportantDates/edit_dates";
-    	} else if(arr[1]=='del'){
+    	} else if(arr[0]=='del'){
     		var url_ = site_url_ + "/ImportantDates/delete_dates";
     	}
     	var data_ = "id="+arr[1];
-
-    	$.ajax({
-    		type: "POST",
-    		url: url_,
-    		data: data_,
-    		success: function(data){
-    			var obj = JSON.parse(data);
-    			if(obj.row.res_ == true ){
-    				$('.colorme').css('color', '#900000');
-    				$('.colorme').css('background', '#FFFAA7');
-    				$('#txtImpDate').val(obj.row.record.IMP_DATE);
-    				$('#txtEvent').val(obj.row.record.IMP_DATE_EVENT);
-    				$('#txtDesc').val(obj.row.record.DESC_);
-    				$('#impdatesid').val(arr[1]);
-    				$('#impdates_update').css('display', 'inline');
-    				$('#impdates_submit').css('display', 'none');
-    			} else alert('some server error. Please reload the page and try again!!');
-    		},
-    		error: function(xhr, error, status){
-    			document.write(xhr.responseText);
-    		}
-    	});
+    	$('#impdatesid').val(arr[1]);
+    	if(arr[0]=='edit'){
+	    	$.ajax({
+	    		type: "POST",
+	    		url: url_,
+	    		data: data_,
+	    		success: function(data){
+	    			var obj = JSON.parse(data);
+	    			if(obj.row.res_ == true ){
+	    				$('.colorme').css('color', '#900000');
+	    				$('.colorme').css('background', '#FFFAA7');
+	    				$('#txtImpDate').val(obj.row.record.IMP_DATE);
+	    				$('#txtEvent').val(obj.row.record.IMP_DATE_EVENT);
+	    				$('#txtDesc').val(obj.row.record.DESC_);
+	    				$('#impdatesid').val(arr[1]);
+	    				$('#impdates_update').css('display', 'inline');
+	    				$('#impdates_submit').css('display', 'none');
+	    			} else alert('some server error. Please reload the page and try again!!');
+	    		},
+	    		error: function(xhr, error, status){
+	    			document.write(xhr.responseText);
+	    		}
+	    	});
+	    } else {
+	    	$('#frmImpDates').attr('action', 'importantDates/delete_dates');
+	    	$('#frmImpDates').submit();
+	    }
     });
 });
 function setDeptDate(startDate, endDate) {

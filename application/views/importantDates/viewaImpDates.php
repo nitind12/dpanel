@@ -61,9 +61,10 @@
                 </tr>
                 <tr>
                 	<th>SNO</th>
-                    <th>Dates</th>
+                    <th>Imp. Dates</th>
                     <th>Event</th>
                     <th>Desc (if any)</th>
+                    <th>Attachment</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -73,9 +74,14 @@
                 <?php foreach($impDateData as $item){ ?>
                 <tr>
                     <td data-title="Downloads"><?php echo $no_;?></a></td>
+                    <td data-title="Downloads"><?php echo $item->IMP_DATE;?></a></td>
                     <td data-title="Name"><?php echo $item->IMP_DATE_EVENT;?></td>
                     <td data-title="TC No."><?php echo $item->DESC_;?></td>
-                    <td data-title="Name"><a href="<?php echo base_url('_assets_/impDatesFiles/'.$item->PATH_);?>" target="_blank">Detail</a></td>
+                    <td data-title="Name">
+                        <?php if($item->PATH_ != 'x'){ ?>
+                            <a href="<?php echo base_url('_assets_/impDatesFiles/'.$item->PATH_);?>" target="_blank">File</a>
+                        <?php }?>
+                    </td>
                     <td data-title="TC No.">
                     	<?php if($item->STATUS_ == 1){ ?>
                     		<div style="color: #009000">Active</div>

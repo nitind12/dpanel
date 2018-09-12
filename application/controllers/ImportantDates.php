@@ -48,7 +48,9 @@ class ImportantDates extends CI_Controller {
 
 	function delete_dates(){
         $this->check_login();
-		
+		$res_ = $this->mid->delDatesData();
+        $this->session->set_flashdata('feed_msg_', $res_['record']);
+        redirect('ImportantDates');
 	}
 
     function check_login(){

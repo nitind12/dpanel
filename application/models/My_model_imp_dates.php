@@ -20,12 +20,18 @@ class My_model_imp_dates extends CI_Model {
     	);
     	if($this->db->insert('importantdates', $data) == true){
             $id_ = $this->db->insert_id();
-            if($this->upload_downloads_file($id_) != 'x'){
-                $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added.');
-            } else {
-                $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added without uploading file.');
+            $path_ = $this->upload_downloads_file($id_);
+            if($path_ != 'x'){
+                $data = array(
+                        'PATH_' => $path_
+                );
+                $this->db->where('IMPDTID', $id_);
+                if($this->db->update('importantdates', $data) == true){
+                    $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added.');
+                } else {
+                    $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added without uploading file.');
+                }
             }
-    		$bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added.');
     	} else {
     		$bool_ = array('res_'=>FALSE, 'msg_' => 'Some server error. Please try again!!!');
     	}
@@ -40,13 +46,23 @@ class My_model_imp_dates extends CI_Model {
             'DATE_'=> date('Y-m-d H:i:s'),
             'USERNAME'=>$this->session->userdata('ussr_')
         );
-        $id_ = $this->input->post('impdatesid');
+        $id_ = $this->input->post('id');
         $this->db->where('IMPDTID', $id_);
         if($this->db->update('importantdates', $data) == true){
-            if($this->upload_downloads_file($id_) != 'x'){
-                $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated.');
-            } else {
-                $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated without uploading file.');
+            $path_ = $this->upload_downloads_file($id_);
+            if($path_ != 'x'){
+                $data = array(
+                        'PATH_' => $path_
+                );
+                $this->db->where('IMPDTID', $id_);
+                if($this->db->update('importantdates', $data) == true){
+                    $data = array(
+                        'PATH_' => $path_
+                    );
+                    $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated.');
+                } else {
+                    $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated without uploading file.');
+                }
             }
         } else {
             $bool_ = array('res_'=>FALSE, 'msg_' => 'Some server error. Please try again!!!');
@@ -57,7 +73,7 @@ class My_model_imp_dates extends CI_Model {
     function upload_downloads_file($id__) {
         $config1 = array(
             'upload_path' => './_assets_/impDatesFiles',
-            'allowed_types' => 'jpg|png|bmp|gif|pdf|txt',
+            'allowed_types' => 'jpg|png|bmp|gif|pdf',
             'overwrite' => TRUE,
             'file_name' => $id__
         );
@@ -91,6 +107,34 @@ class My_model_imp_dates extends CI_Model {
         $query = $this->db->get('importantdates');
         if($query->num_rows()!=0){
             $bool_ = array('res_'=>true, 'record'=>$query->row());
+        } else {
+            $bool_ = array('res_'=>false, 'record'=>'x');
+        }
+        return $bool_;
+    }
+
+    function delDatesData(){
+        $id = $this->input->post('id');
+        $this->db->where('IMPDTID', $id);
+        $query = $this->db->get('importantdates');
+
+        if ($query->num_rows() != 0) {
+            $item_ = $query->row();
+
+            if ($item_->PATH_ != 'x') {
+                $file__ = $item_->PATH_;
+            } else {
+                $file__ = 'x';
+            }
+        }
+        $this->db->where('IMPDTID', $id);
+        $bool_ = $this->db->delete('importantdates');
+        if ($bool_ == TRUE) {
+            if ($file__ != 'x') {
+                $full_path_ = FCPATH . '_assets_/impDatesFiles/' . $file__;
+                @unlink($full_path_);
+                $bool_ = array('res_'=>true, 'record'=>'Record Deleted successfully.');
+            }
         } else {
             $bool_ = array('res_'=>false, 'record'=>'x');
         }
