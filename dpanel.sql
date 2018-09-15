@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.3
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 04, 2018 at 07:00 PM
--- Server version: 5.6.11
--- PHP Version: 5.5.3
+-- Host: localhost:3306
+-- Generation Time: Sep 15, 2018 at 03:50 PM
+-- Server version: 5.6.40
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dpanel`
+-- Database: `kppsedu_dpanel`
 --
 
 -- --------------------------------------------------------
@@ -150,6 +152,30 @@ CREATE TABLE `gallery_category` (
   `PIC` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `gallery_category`
+--
+
+INSERT INTO `gallery_category` (`CATEG_ID`, `CATEGORY`, `DESC`, `STATUS`, `DATE_`, `PIC`) VALUES
+(1, 'General', 'General', 1, '2018-02-16 04:14:05', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `importantdates`
+--
+
+CREATE TABLE `importantdates` (
+  `IMPDTID` int(11) NOT NULL,
+  `IMP_DATE_EVENT` varchar(300) NOT NULL,
+  `IMP_DATE` varchar(11) NOT NULL,
+  `DESC_` text NOT NULL,
+  `PATH_` varchar(100) NOT NULL,
+  `DATE_` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `STATUS_` tinyint(1) NOT NULL DEFAULT '1',
+  `USERNAME` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='used to store important dates';
+
 -- --------------------------------------------------------
 
 --
@@ -169,19 +195,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`USERNAME_`, `PASSWORD_`, `USER_STATUS`, `DEPT_`, `COURSE`) VALUES
-('anika_changed', '*23AE809DDACAF96AF0FD78ED04B6A265E05AA257', '', 'The dpanel of School', ''),
-('dm', '*3FF6E4578914B586845644DA282812B64785737D', 'adm', 'The dpanel of School', 'x'),
-('dm1_changed', '*3FF6E4578914B586845644DA282812B64785737D', 'adm', 'x', 'x'),
-('dm2', '*3FF6E4578914B586845644DA282812B64785737D', 'adm', 'school', 'school'),
-('gunjan', '*3FF6E4578914B586845644DA282812B64785737D', '', 'The dpanel of School', ''),
-('hemant', '123', 'usr', 'The dpanel of School', ''),
-('mom', '*3FF6E4578914B586845644DA282812B64785737D', '', 'The dpanel of School', ''),
-('naveen', '*3FF6E4578914B586845644DA282812B64785737D', 'adm', 'The Sun Beam School', 'School'),
-('nitin', '123', 'adm', 'The Sun Beam School', 'School'),
-('nitin12', '*3FF6E4578914B586845644DA282812B64785737D', '', 'The dpanel of School', ''),
-('nitin123', '123', '', 'The dpanel of School', ''),
-('nitin23', '*3FF6E4578914B586845644DA282812B64785737D', '', 'The dpanel of School', ''),
-('vihaan', '123', '', 'The dpanel of School', '');
+('nitin', '123', 'adm', 'Kids Paradise Public School', 'School');
 
 -- --------------------------------------------------------
 
@@ -214,7 +228,8 @@ INSERT INTO `menu_1` (`ID_`, `PRE_ICON`, `MENU`, `PATH_`, `PRIORITY_`) VALUES
 (10, 'fa fa-camera fa-fw', 'Gallery', 'gallery', 8),
 (11, 'fa fa-camera fa-fw', 'Activity', 'activity', 9),
 (12, 'fa fa-user fa-fw', 'topers', 'topper', 10),
-(13, 'fa fa-user fa-fw', 'Downloads', 'downloads', 10);
+(13, 'fa fa-user fa-fw', 'Downloads', 'downloads', 10),
+(14, 'fa fa-user fa-fw', 'Imp Dates', 'importantDates', 11);
 
 -- --------------------------------------------------------
 
@@ -429,7 +444,8 @@ INSERT INTO `user_menu` (`ID`, `MENU`, `USER_`) VALUES
 (10, 10, 'adm'),
 (11, 11, 'adm'),
 (12, 12, 'adm'),
-(13, 13, 'adm');
+(13, 13, 'adm'),
+(14, 14, 'adm');
 
 -- --------------------------------------------------------
 
@@ -502,6 +518,13 @@ ALTER TABLE `gallery`
 --
 ALTER TABLE `gallery_category`
   ADD PRIMARY KEY (`CATEG_ID`);
+
+--
+-- Indexes for table `importantdates`
+--
+ALTER TABLE `importantdates`
+  ADD PRIMARY KEY (`IMPDTID`),
+  ADD KEY `USERNAME` (`USERNAME`);
 
 --
 -- Indexes for table `login`
@@ -593,82 +616,104 @@ ALTER TABLE `user_status`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `bday_data`
 --
 ALTER TABLE `bday_data`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `downloads`
 --
 ALTER TABLE `downloads`
-  MODIFY `DWNLD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `DWNLD_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `FAC_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `FAC_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `GL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `GL_ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `gallery_category`
 --
 ALTER TABLE `gallery_category`
   MODIFY `CATEG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `importantdates`
+--
+ALTER TABLE `importantdates`
+  MODIFY `IMPDTID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `menu_1`
 --
 ALTER TABLE `menu_1`
-  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `mynews`
 --
 ALTER TABLE `mynews`
-  MODIFY `NID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `NID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `newsevents`
 --
 ALTER TABLE `newsevents`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
   MODIFY `NID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tc_paths`
 --
 ALTER TABLE `tc_paths`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `toppers`
 --
 ALTER TABLE `toppers`
-  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SNO` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `transfer_certificate`
 --
 ALTER TABLE `transfer_certificate`
-  MODIFY `TCID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `TCID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `upcoming`
 --
 ALTER TABLE `upcoming`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- Constraints for dumped tables
 --
@@ -679,6 +724,7 @@ ALTER TABLE `user_menu`
 ALTER TABLE `user_menu`
   ADD CONSTRAINT `fk_mennu` FOREIGN KEY (`MENU`) REFERENCES `menu_1` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`USER_`) REFERENCES `menu_user_status` (`ST_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
