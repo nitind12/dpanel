@@ -143,6 +143,17 @@ $(function(){
 	    	$('#frmImpDates').submit();
 	    }
     });
+
+    $('.active_deactive').click(function(){
+    	var str = this.id;
+    	var obj = str.split("_");
+    	if(obj[0] == 'active'){
+    		url_ = site_url_+'/ImportantDates/active_deactive/'+obj[1]+'/0';
+    	} else {
+    		url_ = site_url_+'/ImportantDates/active_deactive/'+obj[1]+'/1';
+    	}
+    	window.location = url_;
+    });
 });
 function setDeptDate(startDate, endDate) {
     endDate.setAttribute('min', startDate.value);

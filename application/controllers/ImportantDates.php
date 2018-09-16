@@ -53,6 +53,10 @@ class ImportantDates extends CI_Controller {
         redirect('ImportantDates');
 	}
 
+    function active_deactive($imptid, $status){
+        $this->mid->active_deactive($imptid, $status);
+        redirect('ImportantDates');
+    }
     function check_login(){
         if(! $this -> session -> userdata('ussr_')) redirect('login/log__out');
     }

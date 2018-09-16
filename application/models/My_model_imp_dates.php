@@ -31,6 +31,8 @@ class My_model_imp_dates extends CI_Model {
                 } else {
                     $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added without uploading file.');
                 }
+            } else {
+                $bool_ = $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully added without uploading file.');
             }
     	} else {
     		$bool_ = array('res_'=>FALSE, 'msg_' => 'Some server error. Please try again!!!');
@@ -63,6 +65,8 @@ class My_model_imp_dates extends CI_Model {
                 } else {
                     $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated without uploading file.');
                 }
+            } else {
+                $bool_ = array('res_'=>TRUE, 'msg_' => 'Record Sucessfully updated without uploading file.');
             }
         } else {
             $bool_ = array('res_'=>FALSE, 'msg_' => 'Some server error. Please try again!!!');
@@ -139,5 +143,13 @@ class My_model_imp_dates extends CI_Model {
             $bool_ = array('res_'=>false, 'record'=>'x');
         }
         return $bool_;
+    }
+
+    function active_deactive($imptid, $status){
+        $this->db->where('IMPDTID', $imptid);
+        $data = array(
+            'STATUS_'=>$status
+        );
+        $this->db->update('importantdates', $data);
     }
 }

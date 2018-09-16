@@ -72,28 +72,28 @@
             <tbody>
                 <?php $no_=1;?>
                 <?php foreach($impDateData as $item){ ?>
-                <tr>
-                    <td data-title="Downloads"><?php echo $no_;?></a></td>
-                    <td data-title="Downloads"><?php echo $item->IMP_DATE;?></a></td>
-                    <td data-title="Name"><?php echo $item->IMP_DATE_EVENT;?></td>
-                    <td data-title="TC No."><?php echo $item->DESC_;?></td>
-                    <td data-title="Name">
-                        <?php if($item->PATH_ != 'x'){ ?>
-                            <a href="<?php echo base_url('_assets_/impDatesFiles/'.$item->PATH_);?>" target="_blank">File</a>
-                        <?php }?>
-                    </td>
-                    <td data-title="TC No.">
-                    	<?php if($item->STATUS_ == 1){ ?>
-                    		<div style="color: #009000">Active</div>
-                    	<?php } else { ?>
-                    		<div style="color: #ff0000">De-Active</div>
-                    	<?php } ?>
-                    </td>
-                    <td data-title="Modification">
-                        <i class="fa fa-pencil-square-o edit_del" id="edit_<?php echo $item->IMPDTID;?>" style="color:#0066cc; font-size: 20px; cursor: pointer"></i> | 
-                        <i class="fa fa-times edit_del"  id="del_<?php echo $item->IMPDTID;?>" style="color:#E13300; font-size: 20px; cursor: pointer"></i>
-                    </td>
-                </tr>
+                    <tr>
+                        <td data-title="Downloads"><?php echo $no_;?></a></td>
+                        <td data-title="Downloads"><?php echo $item->IMP_DATE;?></a></td>
+                        <td data-title="Name"><?php echo $item->IMP_DATE_EVENT;?></td>
+                        <td data-title="TC No."><?php echo $item->DESC_;?></td>
+                        <td data-title="Name">
+                            <?php if($item->PATH_ != 'x'){ ?>
+                                <a href="<?php echo base_url('_assets_/impDatesFiles/'.$item->PATH_);?>" target="_blank">File</a>
+                            <?php }?>
+                        </td>
+                        <td data-title="TC No.">
+                        	<?php if($item->STATUS_ == 1){ ?>
+                        		<div><a href="#" class="active_deactive" id="active_<?php echo $item->IMPDTID;?>" style="border-radius: 4px; padding: 0px 3px;color: #ffffff; background: #009000">Active</a></div>
+                        	<?php } else { ?>
+                        		<div><a href="#" class="active_deactive" id="deactive_<?php echo $item->IMPDTID;?>" style="border-radius: 4px; padding: 0px 3px;color: #ffffff; background: #FE7B7B">De-Active</a></div>
+                        	<?php } ?>
+                        </td>
+                        <td data-title="Modification">
+                            <i class="fa fa-pencil-square-o edit_del" id="edit_<?php echo $item->IMPDTID;?>" alt="Edit" style="color:#0066cc; font-size: 20px; cursor: pointer"></i> | 
+                            <i class="fa fa-times edit_del"  id="del_<?php echo $item->IMPDTID;?>" alt="Delete" style="color:#E13300; font-size: 20px; cursor: pointer"></i>
+                        </td>
+                    </tr>
                 <?php $no_++;?>
                 <?php } ?>
             </tbody>
