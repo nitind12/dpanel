@@ -16,6 +16,8 @@ class Activity extends CI_Controller {
 
     function index(){
     	$data['user___'] = $this->session->userdata('ussr_');
+        $data['Act_categ'] = $this->mma->getall_activity_category();
+        $data['active_category'] = $this->mma->get_active_activity_category();
         $data['activity_'] = $this->mma->get_active_activities();
         $data['activity_d'] = $this->mma->get_deactive_activities();
         $data['menu'] = $this->mm->get_menu($this->session->userdata('stss_'));
@@ -31,6 +33,29 @@ class Activity extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('inner', $data);
         $this->load->view('templates/footer');
+    }
+
+    function active_deactive_category($categid, $status){
+        $this->mma->active_deactive_category($categid, $status);
+        redirect('activity');
+    }
+
+    function edit_activity_category(){
+        $data['row'] = $this->mma->get_activity_category();
+        echo json_encode($data);
+    }
+
+    function delete_activity_category(){
+        $res_ = $this->mma->delete_activity_category();
+        $this->session->set_flashdata('feed_msg_', $res_['record']);
+        redirect('activity');
+    }
+
+    function feedactivityCategory(){
+        $res_ = $this->mma->feedactivityCategory();
+        
+        $this->session->set_flashdata('feed_msg_', $res_['msg_']);
+        redirect('activity');        
     }
     function feedactivity(){
     	$res_ = $this->mma->feedactivity();
@@ -49,6 +74,7 @@ class Activity extends CI_Controller {
     }
     function editactivity($id_){
         $data['user___'] = $this->session->userdata('ussr_');
+        $data['active_category'] = $this->mma->get_active_activity_category();
         $data['activity_'] = $this->mma->get_active_activities();
         $data['activity_d'] = $this->mma->get_deactive_activities();
         $data['edit_activity_'] = $this->mma->get_activity_detail($id_);

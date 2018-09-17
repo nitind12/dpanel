@@ -13,7 +13,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $item->ID; ?>"><?php echo $loop1; ?>. <?php echo $item->TITLE_; ?></a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $item->ID; ?>"><?php echo $loop1; ?>. <?php echo $item->TITLE_; ?> <span style="color: #CC0000; font-size: 11px; font-weight: bold">[Category - <?php echo $item->CATEGORY;?>]</span></a>
                                 <?php echo anchor('activity/active_deactive_activity/'.$item->ID.'/0', '<span style="font-size: 11px; color: #ff0000; background: #ffff00; padding: 2px">Deactivate</span>', array('style'=>'float: right')); ?>
                             </h4>
                             

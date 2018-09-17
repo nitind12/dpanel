@@ -8,10 +8,92 @@ class My_model_activities extends CI_Model {
         parent::__construct();
     }
 
+    function feedactivityCategory(){
+        $categ = $this->input->post('txtActivityCategory');
+
+        $this->db->where('CATEGORY', $categ);
+        $query = $this->db->get('activities_category');
+        if($query->num_rows()!=0){
+            $bool_ = array('res_'=>TRUE, 'msg_'=>'X: Activity Category already exist !!');
+        } else {
+            if($this->input->post('actcateg_submit') == 'submit'){
+                $data = array(
+                    'CATEGORY' => $categ,
+                    'USERNAME_' => $this->session->userdata('ussr_'),
+                    'DATE_' => date('Y-m-d H:i:s'),
+                    'STATUS_' => 1
+                );
+                if($this->db->insert('activities_category', $data)){
+                    $bool_ = array('res_'=>TRUE, 'msg_'=>'Activity Category Submitted Successfully.');
+                } else {
+                    $bool_ = array('res_'=>FALSE, 'msg_'=>'Some Server Error !! Please try again.');
+                }
+            } else {
+                $data = array(
+                    'CATEGORY' => $categ,
+                    'USERNAME_' => $this->session->userdata('ussr_'),
+                    'DATE_' => date('Y-m-d H:i:s')
+                );
+                $this->db->where('ACT_CATEG_ID', $this->input->post('id'));
+                if($this->db->update('activities_category', $data)){
+                    $bool_ = array('res_'=>TRUE, 'msg_'=>'Activity Category updated Successfully.');
+                } else {
+                    $bool_ = array('res_'=>FALSE, 'msg_'=>'Some Server Error !! Please try again.');
+                }
+            }
+        }
+
+        return $bool_;
+    }
+    function getall_activity_category(){
+        $query = $this->db->get('activities_category');
+        return $query->result();
+    }
+    function get_active_activity_category(){
+        $this->db->where('STATUS_', 1);
+        $query = $this->db->get('activities_category');
+        return $query->result();
+    }
+    function get_activity_category(){
+        $id_ = $this->input->post('id');
+        $this->db->where('ACT_CATEG_ID', $id_);
+        $query = $this->db->get('activities_category');
+        if($query->num_rows()!=0){
+            $bool_ = array('res_'=>true, 'record'=>$query->row());
+        } else {
+            $bool_ = array('res_'=>false, 'record'=>'x');
+        }
+        return $bool_;
+    }
+    function delete_activity_category(){
+        $id = $this->input->post('id');
+        $this->db->where('ACT_CATEG_ID', $id);
+        $query = $this->db->get('activities_category');
+
+        if ($query->num_rows() != 0) {
+            $item_ = $query->row();
+        }
+        $this->db->where('ACT_CATEG_ID', $id);
+        $bool_ = $this->db->delete('activities_category');
+        if ($bool_ == TRUE) {
+            $bool_ = array('res_'=>true, 'record'=>'Record Deleted successfully.');
+        } else {
+            $bool_ = array('res_'=>false, 'record'=>'x');
+        }
+        return $bool_;
+    }
+    function active_deactive_category($categid, $status){
+        $this->db->where('ACT_CATEG_ID', $categid);
+        $data = array(
+            'STATUS_'=>$status
+        );
+        $this->db->update('activities_category', $data);
+    }
     function feedactivity(){
     	$title_ = $this->input->post('txtTitle');
     	$brief_ = $this->input->post('txtBriefDesc');
     	$date_of_activity = $this->input->post('txtDateofActivity');
+        $categid = $this->input->post('cmbActivityCategory');
 
     	$data = array(
     		'TITLE_' => $title_,
@@ -21,7 +103,8 @@ class My_model_activities extends CI_Model {
     		'DATE_OF_ACTIVITY' => $date_of_activity,
     		'DATE_' => date('Y-m-d H:i:s'),
     		'STATUS_' => 1,
-            'USERNAME_' => $this->session->userdata('ussr_')
+            'USERNAME_' => $this->session->userdata('ussr_'),
+            'ACTIVITYCATEGID' => $categid
     	);
     	$query = $this->db->insert('activities', $data);
 
@@ -89,22 +172,32 @@ class My_model_activities extends CI_Model {
     }
 
     function get_active_activities(){
-    	$this->db->where('STATUS_', 1);
+    	//$this->db->where('a.STATUS_', 1);
+        $this->db->where('b.STATUS_', 1);
         if($this->session->userdata('stss_') != 'adm'){
-            $this->db->where('USERNAME_', $this->session->userdata('ussr_'));
+            $this->db->where('b.USERNAME_', $this->session->userdata('ussr_'));
         }
-    	$query = $this->db->get('activities');
+        $this->db->order_by('ACTIVITYCATEGID');
+        $this->db->select('a.CATEGORY, b.*');
+        $this->db->from('activities_category a');
+        $this->db->join('activities b', 'a.ACT_CATEG_ID=b.ACTIVITYCATEGID');
+    	$query = $this->db->get();
 
     	return $query->result();
     }
     function get_deactive_activities(){
-    	$this->db->where('STATUS_', 0);
+    	//$this->db->where('a.STATUS_', 0);
+        $this->db->where('b.STATUS_', 0);
         if($this->session->userdata('stss_') != 'adm'){
-            $this->db->where('USERNAME_', $this->session->userdata('ussr_'));
+            $this->db->where('b.USERNAME_', $this->session->userdata('ussr_'));
         }
-    	$query = $this->db->get('activities');
+        $this->db->order_by('ACTIVITYCATEGID');
+        $this->db->select('a.CATEGORY, b.*');
+        $this->db->from('activities_category a');
+        $this->db->join('activities b', 'a.ACT_CATEG_ID=b.ACTIVITYCATEGID');
+        $query = $this->db->get();
 
-    	return $query->result();
+        return $query->result();
     }
     function get_activity_detail($id_){
         $this->db->where('ID', $id_);
@@ -130,7 +223,7 @@ class My_model_activities extends CI_Model {
         $title_ = $this->input->post('txtTitle');
         $brief_ = $this->input->post('txtBriefDesc');
         $date_of_activity = $this->input->post('txtDateofActivity');
-
+        $categid = $this->input->post('cmbActivityCategory');
         
         $path_1 = $this->upload_activity_file($id_, 'txtInputFileDescription');
         $path_2 = $this->upload_activity_photo($id_, 'txtInputFilePicture');
@@ -144,7 +237,8 @@ class My_model_activities extends CI_Model {
                     'PICTURE_PATH' => $path_2,
                     'DATE_OF_ACTIVITY' => $date_of_activity,
                     'DATE_' => date('Y-m-d H:i:s'),
-                    'USERNAME_' => $this->session->userdata('ussr_')
+                    'USERNAME_' => $this->session->userdata('ussr_'),
+                    'ACTIVITYCATEGID' => $categid
                 );
             } else {
                 $data = array(
@@ -153,7 +247,8 @@ class My_model_activities extends CI_Model {
                     'DET_PATH' => $path_1,
                     'DATE_OF_ACTIVITY' => $date_of_activity,
                     'DATE_' => date('Y-m-d H:i:s'),
-                    'USERNAME_' => $this->session->userdata('ussr_')
+                    'USERNAME_' => $this->session->userdata('ussr_'),
+                    'ACTIVITYCATEGID' => $categid
                 );
             }
         } else if($path_2 != 'sample.jpg'){
@@ -163,7 +258,8 @@ class My_model_activities extends CI_Model {
                 'PICTURE_PATH' => $path_2,
                 'DATE_OF_ACTIVITY' => $date_of_activity,
                 'DATE_' => date('Y-m-d H:i:s'),
-                'USERNAME_' => $this->session->userdata('ussr_')
+                'USERNAME_' => $this->session->userdata('ussr_'),
+                'ACTIVITYCATEGID' => $categid
             );
         } else {
             $data = array(
@@ -171,7 +267,8 @@ class My_model_activities extends CI_Model {
                 'BRIEF_' => $brief_,
                 'DATE_OF_ACTIVITY' => $date_of_activity,
                 'DATE_' => date('Y-m-d H:i:s'),
-                'USERNAME_' => $this->session->userdata('ussr_')
+                'USERNAME_' => $this->session->userdata('ussr_'),
+                'ACTIVITYCATEGID' => $categid
             );
         }
 

@@ -144,7 +144,7 @@ $(function(){
 	    }
     });
 
-    $('.active_deactive').click(function(){
+    $('body').on('click','.active_deactive', function(){
     	var str = this.id;
     	var obj = str.split("_");
     	if(obj[0] == 'active'){
@@ -154,6 +154,51 @@ $(function(){
     	}
     	window.location = url_;
     });
+    $('body').on('click','.active_deactive_category', function(){
+    	var str = this.id;
+    	var obj = str.split("_");
+    	if(obj[0] == 'active'){
+    		url_ = site_url_+'/activity/active_deactive_category/'+obj[1]+'/0';
+    	} else {
+    		url_ = site_url_+'/activity/active_deactive_category/'+obj[1]+'/1';
+    	}
+    	window.location = url_;
+    });
+    $('body').on('click', '.categ_edit_del', function(){
+    	var str = this.id;
+    	var arr = str.split('_');
+    	if(arr[0] == 'edit'){
+    		var url_ = site_url_ + "/activity/edit_activity_category";
+    	} else if(arr[0]=='del'){
+    		var url_ = site_url_ + "/activity/delete_activity_category";
+    	}
+    	$('#actcategid').val(arr[1]);
+    	if(arr[0]=='edit'){
+    		var data_ = "id="+arr[1];
+	    	$.ajax({
+	    		type: "POST",
+	    		url: url_,
+	    		data: data_,
+	    		success: function(data){
+	    			var obj = JSON.parse(data);
+	    			if(obj.row.res_ == true ){
+	    				$('.colorme').css('color', '#900000');
+	    				$('.colorme').css('background', '#FFFAA7');
+	    				$('#txtActivityCategory').val(obj.row.record.CATEGORY);
+	    				$('#actcategid').val(arr[1]);
+	    				$('#actcategdates_update').css('display', 'inline');
+	    				$('#actcategdates_submit').css('display', 'none');
+	    			} else alert('some server error. Please reload the page and try again!!');
+	    		},
+	    		error: function(xhr, error, status){
+	    			document.write(xhr.responseText);
+	    		}
+	    	});
+	    } else {
+	    	$('#frmActivitiesCategories').attr('action', 'activity/delete_activity_category');
+	    	$('#frmActivitiesCategories').submit();
+	    }
+    });	
 });
 function setDeptDate(startDate, endDate) {
     endDate.setAttribute('min', startDate.value);

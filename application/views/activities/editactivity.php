@@ -8,6 +8,28 @@
                 <div class="col-sm-6">
                     <?php echo form_open_multipart('activity/updateactivity/'.$edit_activity_->ID, array('name' => 'frmeditActivities', 'id' => 'frmeditActivities', 'role' => 'form')); ?>
                     <div class="form-group">
+                        <label>Category<sup>*</sup></label>
+                        <?php
+                        $data = array(
+                            'type' => 'text',
+                            'maxlength' => '28',
+                            'autocomplete' => 'off',
+                            'required' => 'required',
+                            'placeholder' => 'Activity Category',
+                            'class' => 'required form-control',
+                            'name' => 'cmbActivityCategory',
+                            'id' => 'cmbActivityCategory',
+                            'style' => 'color: #ff9000'
+                        );
+                        $options = array();
+                        $options[''] = "Select";
+                        foreach ($active_category as $categ_active_item) {
+                            $options[$categ_active_item->ACT_CATEG_ID] = $categ_active_item->CATEGORY;
+                        }
+                        echo form_dropdown($data, $options, $edit_activity_->ACTIVITYCATEGID);
+                        ?>
+                    </div>
+                    <div class="form-group">
                         <label>Title<sup>*</sup></label>
                         <?php
                         $data = array(
