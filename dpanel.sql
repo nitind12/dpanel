@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 05:58 PM
+-- Generation Time: Dec 11, 2018 at 06:09 AM
 -- Server version: 5.6.11-log
 -- PHP Version: 5.5.3
 
@@ -48,8 +48,8 @@ INSERT INTO `activities` (`ID`, `TITLE_`, `BRIEF_`, `DET_PATH`, `PICTURE_PATH`, 
 (2, 'Happy Diwali', 'Program will motivate the students to participate in live sessions projects i.e. projects from outside campus that also financially boosts them and also to participate in live events of the group of Institutes under the supervision of internal assigned experts.\r\nLive session opportunities will be provided to the dedicated/selected students in their interested projects under the experts’ supervision.\r\n', '2.jpg', '2.jpg', '2018-02-03', '2018-02-09 18:48:41', 1, 'nitin', 9),
 (3, 'Testing', '2. 1 time fee if submitted then it should be removed from the particular student.\r\n3. If march invoice generated the pay fee should be shown of march not feb and pending fee should be added in march fee.\r\n\r\n4. Set withdrawl in pay fee (fix the textfield for withdrawl amount, which is to be filled by the opt), show the total paid fee in the session for detail view receipt wise.\r\n\r\n5. in case of withdrawl or leaving school invoice generated but fee not paid then cancel invoice the same., then switch class or cancel admission (in case of cancel admission status of admission should be set to 0(means disable from the software presenting canceled admission)', '3.docx', '3.JPG', '2018-05-13', '2018-05-15 15:18:06', 1, 'nitin', 9),
 (4, 'one more', 'Fly prepaid If you are planning a vacation and fear spending the saved money elsewhere you can save up with, Lusso Trip\'s e-wallet facility. Customers generally keep a Rs 10,000 balance on their e-wallet and save up as much as Rs 1 lakh to book tickets when they want to. ', '4.docx', '4.jpg', '2018-05-09', '2018-05-15 15:23:39', 1, 'nitin', 9),
-(5, 'switch student', 'student detail class & section wise \r\n 2. Fee detail class & section wise\r\n 3. Fee Amount head wise for all classes this month.\r\n 4. Fee Amount head wise class wise.\r\n 5. Fee due amout class wise for current invoice.\r\n 6. Total fee collected between dates class wise and also show due amount.\r\n 7. Total actual fee should be collected between dates.\r\n 8. Over all total fee collected in this session.', '5.docx', 'sample.jpg', '2018-05-14', '2018-05-15 15:24:15', 1, 'nitin', 9),
-(6, 'Test', 'This chapter introduces parallel processing and parallel database technologies, which offer great advantages for online transaction processing and decision support applications. The administrator\'s challenge is to selectively deploy this technology to fully use its multiprocessing power.<br>\r\nParallel processing divides a large task into many smaller tasks, and executes the smaller tasks concurrently on several nodes. As a result, the larger task completes more quickly.', '6.jpg', 'sample.jpg', '2018-06-03', '2018-09-17 15:36:42', 0, 'nitin', 9);
+(5, 'switch student', 'student detail class & section wise \r\n 2. Fee detail class & section wise\r\n 3. Fee Amount head wise for all classes this month.\r\n 4. Fee Amount head wise class wise.\r\n 5. Fee due amout class wise for current invoice.\r\n 6. Total fee collected between dates class wise and also show due amount.\r\n 7. Total actual fee should be collected between dates.\r\n 8. Over all total fee collected in this session.', '5.docx', '5.jpg', '2018-05-14', '2018-09-18 16:49:42', 1, 'nitin', 9),
+(6, 'Test', 'This chapter introduces parallel processing and parallel database technologies, which offer great advantages for online transaction processing and decision support applications. The administrator\'s challenge is to selectively deploy this technology to fully use its multiprocessing power.<br>\r\nParallel processing divides a large task into many smaller tasks, and executes the smaller tasks concurrently on several nodes. As a result, the larger task completes more quickly.', '6.jpg', 'sample.jpg', '2018-06-03', '2018-09-18 16:30:59', 1, 'nitin', 7);
 
 -- --------------------------------------------------------
 
@@ -919,7 +919,7 @@ ALTER TABLE `activities`
 -- AUTO_INCREMENT for table `activities_category`
 --
 ALTER TABLE `activities_category`
-  MODIFY `ACT_CATEG_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ACT_CATEG_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `announcements`
 --
