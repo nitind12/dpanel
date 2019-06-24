@@ -1,6 +1,4 @@
-<?php
-
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Tc extends CI_Controller {
 
@@ -24,7 +22,7 @@ class Tc extends CI_Controller {
         $data['thisYear'] = $year__;
         $data['limit_'] = $limit;
         $data['folder_'] = 'tc';
-        $data['page__'] = 'feedtc';
+        $data['page__'] = 'feedtcnew';
         $data['page_head'] = 'Upload &amp; Manage TC';
         $data['view1'] = 'viewatc_';
         $data['wallpaper_'] = '';

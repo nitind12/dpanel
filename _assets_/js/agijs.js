@@ -199,6 +199,267 @@ $(function(){
 	    	$('#frmActivitiesCategories').submit();
 	    }
     });	
+
+    // Uploading and view TC data
+    	load_data();
+    	$('#reloadData').click(function(){load_data();});
+		function load_data(){
+			var class_ = $('#txtClass').val();
+			var session_ = $('#txtSession').val();
+			$('#view_tc_data').html('Wait! Its loading...');
+			if(class_!='' && session_!=''){
+				var url_ = site_url_ + "/excel_/fetchTCData"
+				var data_ = "txtSession="+session_+"&txtClass="+class_;
+				$.ajax({
+					url:url_,
+					type:"POST",
+					data: data_,
+					success:function(data){
+						var obj = JSON.parse(data);
+						var len = obj.studentTCData.length;
+						var sno = 1;
+						$('#heading_TC_data').html('<b style="background: #f0f000; padding: 3px; border-radius: 3px">Class: '+class_+'</b> | <b style="background: #00f0f0; padding: 3px; border-radius: 3px">Session: '+session_+'</b>');
+						var str = '';
+						if(len != 0){
+							str = str + "<table style='width: 3200px; height: auto; max-height: 100px; font-family: Arial; font-size: 12px' class='table'>";
+							str = str + "<tr style='vertical-align: top;'>";
+							str = str + "<th style='text-align: left'>Action</th>";
+							str = str + "<th>Serial</th>";
+							str = str + "<th>Date of Issue</th>";
+							str = str + "<th>Student Name</th>";
+							str = str + "<th>Mother</th>";
+							str = str + "<th>Father</th>";
+							str = str + "<th>School No</th>";
+							str = str + "<th>Book No</th>";
+							str = str + "<th>SN No</th>";
+							str = str + "<th>Admission No</th>";
+							str = str + "<th>Affiliation No</th>";
+							str = str + "<th>Reg. No</th>";
+							str = str + "<th>Nationality</th>";
+							str = str + "<th>DOB</th>";
+							str = str + "<th>Category</th>";
+							str = str + "<th>Student Failed?</th>";
+							str = str + "<th>Subject Offered</th>";
+							str = str + "<th>Last Studied Class</th>";
+							str = str + "<th>School/ Board</th>";
+							str = str + "<th>Promoted?</th>";
+							str = str + "<th>Dues Paid?</th>";
+							str = str + "<th>Any Consession?</th>";
+							str = str + "<th>NCC/ Scout/ Guide</th>";
+							str = str + "<th>Date of Cutting Name</th>";
+							str = str + "<th>Reason of Leaving School</th>";
+							str = str + "<th>No of meetings upto date</th>";
+							str = str + "<th>School days attended</th>";
+							str = str + "<th>General Conduct</th>";
+							str = str + "<th>Remarks (if any)</th>";
+							str = str + "</tr>";
+							for(i=0;i<obj.studentTCData.length; i++){
+								if(obj.studentTCData[i]['ORIGINAL'] == 0){
+									myicon = "fa-power-off";
+									mycss = "color: #C0C0C0; cursor: pointer";
+									myclass = " class='dblclickedit' ";
+								} else {
+									myicon = "fa-check categ_edit_del";
+									mycss = "color:#0066cc; font-size: 13px; cursor: pointer";
+									myclass = " class='disableedit' ";
+								}
+								str = str + "<tr>";
+								str = str + "<td style='text-align: left; width: 80px;'>";
+								str = str + '<i class="fa '+myicon+' issueTC" id="issue_'+obj.studentTCData[i]['TCID']+'" title="Issue TC" style="'+mycss+'"></i> |';
+								str = str + '<i class="fa fa-times categ_edit_del"  id="del_'+obj.studentTCData[i]['TCID']+'" title="Delete" style="color:#E13300; font-size: 13px; cursor: pointer"></i>';
+								str = str + "</td>";
+								str = str + "<td style='text-align: center'>"+sno+"</td>";
+								if(obj.studentTCData[i]['DATE_OF_ISSUE'] != 'x'){
+									str = str + "<td class='disableedit'>"+obj.studentTCData[i]['DATE_OF_ISSUE']+"</td>";
+								} else {
+									str = str + "<td>-</td>";
+								}
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@CANDIDATE_NAME'>"+obj.studentTCData[i]['CANDIDATE_NAME']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@MOTHERS_NAME'>"+obj.studentTCData[i]['MOTHERS_NAME']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@FATHERS_NAME'>"+obj.studentTCData[i]['FATHERS_NAME']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SCHOOL_NO'>"+obj.studentTCData[i]['SCHOOL_NO']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@BOOK_NO'>"+obj.studentTCData[i]['BOOK_NO']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SNO'>"+obj.studentTCData[i]['SNO']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@ADMISSION_NO'>"+obj.studentTCData[i]['ADMISSION_NO']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@AFFILIATION_NO'>"+obj.studentTCData[i]['AFFILIATION_NO']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@REGNO_OF_CANDIDATE'>"+obj.studentTCData[i]['REGNO_OF_CANDIDATE']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@NATIONALITY'>"+obj.studentTCData[i]['NATIONALITY']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@DOB_IN_WORDS'>"+obj.studentTCData[i]['DOB_IN_WORDS']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SC_ST_OBC_GEN_CATEGORY'>"+obj.studentTCData[i]['SC_ST_OBC_GEN_CATEGORY']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@STUDENT_FAILED'>"+obj.studentTCData[i]['STUDENT_FAILED']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SUBJECT_OFFERED'>"+obj.studentTCData[i]['SUBJECT_OFFERED']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@LAST_STUDIED_CLASS'>"+obj.studentTCData[i]['LAST_STUDIED_CLASS']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SCHOOL_OR_BOARD'>"+obj.studentTCData[i]['SCHOOL_OR_BOARD']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@PROMOTED'>"+obj.studentTCData[i]['PROMOTED']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@DUES_PAID'>"+obj.studentTCData[i]['DUES_PAID']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@ANY_CONSESSION'>"+obj.studentTCData[i]['ANY_CONSESSION']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@NCC_SCOUT_GUIDE'>"+obj.studentTCData[i]['NCC_SCOUT_GUIDE']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@DATE_OF_CUTTING_NAME'>"+obj.studentTCData[i]['DATE_OF_CUTTING_NAME']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@REASON_OF_LEAVING_SCHOOL'>"+obj.studentTCData[i]['REASON_OF_LEAVING_SCHOOL']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@NO_OF_MEETING_UPTODATE'>"+obj.studentTCData[i]['NO_OF_MEETING_UPTODATE']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@SCHOOL_DAYS_ATTENDED'>"+obj.studentTCData[i]['SCHOOL_DAYS_ATTENDED']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@GENERAL_CONDUCT_OF_STUDENT'>"+obj.studentTCData[i]['GENERAL_CONDUCT_OF_STUDENT']+"</td>";
+								str = str + "<td"+myclass+" id='"+obj.studentTCData[i]['TCID']+"@REMARKS_IF_ANY'>"+obj.studentTCData[i]['REMARKS_IF_ANY']+"</td>";
+								str = str + "</tr>";
+								sno++;
+							}
+							str= str + "</table>";
+						} else {
+							str = "No Data Found...";
+						}
+						$('#view_tc_data').html(str);
+					}
+				});
+			} else {
+				$('#view_tc_data').html('No Data Found...');
+			}
+		}
+
+		$('#frmTCDetail').on('submit', function(event){
+			event.preventDefault();
+			var url_ = site_url_ + "/excel_/uploadTCData";
+			$.ajax({
+				url:url_,
+				type:"POST",
+				data:new FormData(this),
+				contentType:false,
+				cache:false,
+				processData:false,
+				success:function(data){
+					//$('#file').val('');
+					load_data();
+					//alert(data);
+				}
+			});
+			$('#txtTCDataUpload').val('');
+			return false;
+		});
+
+		$('#txtClass').change(function(){load_data();});
+		$('#txtSession').change(function(){load_data();});
+
+		$('body').on('click','.issueTC', function(){
+			var str = this.id;
+			var arr = str.split('_');
+			var url_ = site_url_ + "/Excel_/geTCRecordforstudent/"+arr[1];
+			var str = $('#txtIssueDate').val();
+			var arr = str.split('-');
+			var tc_dt = arr[2]+"-"+arr[1]+"-"+arr[0];
+			$('#txtTCID').html('...');
+			$('#tcName').html('...');
+			$('#tcFather').html('...');
+			$('#tcMother').html('...');
+			$('#tcDOB').html('...');
+			$('#tcLSC').html('...');
+			$('.copy__').html('...');
+			$.ajax({
+				url: url_,
+				type:"POST",
+				success: function(data){
+					var obj = JSON.parse(data);
+					$('#txtTCID').html(obj.record.TCID);
+					$('#tcName').html(obj.record.CANDIDATE_NAME);
+					$('#tcFather').html(obj.record.FATHERS_NAME);
+					$('#tcMother').html(obj.record.MOTHERS_NAME);
+					$('#tcDOB').html(obj.record.DOB_IN_WORDS);
+					$('#tcLSC').html(obj.record.LAST_STUDIED_CLASS);
+					$('#txtRemark').val(obj.record.REMARKS_IF_ANY);
+					$('.dt_').html(tc_dt);
+					if(obj.record.ORIGINAL == 0){
+						$('.copy__').css('color', '#009000');
+						$('.copy__').html('Original');
+						$('#txtTCTerms').html("I accept all terms &amp; Conditions in issuing this Transfer Certificate as (Original copy) on behalf of the School ("+obj.school_+") authority.")
+					} else {
+						$('.copy__').css('color', '#ff0000');
+						$('.copy__').html('Duplicate');
+						$('#txtTCTerms').html("I accept all terms &amp; Conditions in issuing this Transfer Certificate as (Duplicate copy) on behalf of the School ("+obj.school_+") authority.")
+					}
+				}
+			});
+			$('#issue_tc_data').css('display', 'block');
+		});
+
+		$('#cmbCancelTCIssue').click(function(){
+			$('#tcName').html('');
+			$('#tcFather').html('');
+			$('#tcMother').html('');
+			$('#tcDOB').html('');
+			$('#tcLSC').html('');
+		});
+
+		$('#cmbIssueTC').click(function(){
+			$('#cmbIssueTC').val('Wait its loading...');
+			$('#cmbIssueTC').removeClass('btn-success');
+			$('#cmbIssueTC').addClass('btn-default');
+			var url_= site_url_ + "/Excel_/issueTC/";
+			var data_ = "tcid="+encodeURIComponent($('#txtTCID').html())+"&txtIssueDate="+encodeURIComponent($('#txtIssueDate').val())+"&txtRemark="+encodeURIComponent($('#txtRemark').val())+"&txtTCTerms="+encodeURIComponent($('#txtTCTerms').html());
+			$.ajax({
+				url: url_,
+				type: 'POST',
+				data: data_,
+				success: function(data){
+					var obj = JSON.parse(data);
+					if(obj.res == true){
+						$('#cmbCancelTCIssue').click();
+						$('#issue_tc_data').css('display', 'none');
+						$('#view_tc_data').html('TC Successfully issued to '+obj.name);
+						window.open(site_url_+'/Excel_/printTC/'+$('#txtTCID').html());
+					}
+				}
+			});
+		});
+		$('#txtIssueDate').change(function(){
+			var str = $(this).val();
+			var arr = str.split('-');
+			var tc_dt = arr[2]+"-"+arr[1]+"-"+arr[0];
+			$('.dt_').html(tc_dt);
+		});
+		$('#chkAcceptTerms').click(function(){
+			if($('#chkAcceptTerms:checkbox:checked').length>0){
+				$('#cmbIssueTC').removeAttr('disabled');
+			} else {
+				$('#cmbIssueTC').attr('disabled', 'disabled');
+			}
+		})
+		$('body').on('dblclick', '.dblclickedit', function(){
+			// this.id - it will give you the specific id of td where dblclick held
+			var str = this.id;
+			var arr = str.split('@');
+			$(this).css('color', '#0000ff');
+			oriVal = $(this).text();
+			$(this).attr('title', 'Earlier - '+oriVal)
+		    $(this).text("");
+		    $("<input type='text' id="+arr[1]+"-"+arr[0]+" value='"+oriVal+"' class='dblfocusout' style='background: #05FFE1; color: #000090'>").appendTo(this).focus();
+		});
+		
+		$('body').on('focusout', '.dblfocusout', function(){
+			var str = this.id;
+			var arr = str.split('-');
+			//alert(arr[0] + "  " + arr[1] + "  " + arr[2]);
+			var $this = $(this);
+		    var newVal = $this.val();
+		    $this.parent().text($this.val() || oriVal);
+		    $this.remove(); // Don't just hide, remove the element.
+		    var dt__ = $this.val();
+		    var data_ = "id="+arr[1]+"&newvalue="+newVal+"&columnname="+arr[0];
+		    var url_ = site_url_ + "/excel_/updatedColumn";
+
+		    $.ajax({
+		    	url:url_,
+				type: 'post',
+				data: data_,
+				success: function(data){
+					if(data == false){
+						alert('Some server error! Please try again')
+					} else {
+					}
+				}, error: function (xhr, status, error){
+					//alert(xhr.responseText);
+				}
+		    });
+		});
+    // --------------------------
+    
 });
 function setDeptDate(startDate, endDate) {
     endDate.setAttribute('min', startDate.value);

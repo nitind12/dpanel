@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2018 at 06:09 AM
+-- Generation Time: Dec 26, 2018 at 11:04 AM
 -- Server version: 5.6.11-log
 -- PHP Version: 5.5.3
 
@@ -147,8 +147,10 @@ CREATE TABLE `downloads` (
 --
 
 INSERT INTO `downloads` (`DWNLD_ID`, `TITLE`, `DESCRIPTION`, `PATH_`, `DATE_`, `STATUS`, `USERNAME`) VALUES
-(1, 'test', 'asdasd as dasd', '1.docx', '2018-06-04 20:35:18', 1, 'nitin'),
-(5, 'Test 2', 'ssdsd', '5.pdf', '2018-06-04 21:42:20', 1, 'nitin');
+(1, 'test', 'First test file to download.', '1.docx', '2018-12-25 12:14:13', 1, 'nitin'),
+(5, 'Test 2', 'Second test file to download.', '5.pdf', '2018-12-25 12:14:26', 1, 'nitin'),
+(6, 'Test 3', 'Third test file to download.', '6.jpg', '2018-12-25 12:43:14', 1, 'nitin'),
+(7, 'Test 4', 'Another test file to download.', '7.jpg', '2018-12-25 12:43:38', 1, 'nitin');
 
 -- --------------------------------------------------------
 
@@ -245,12 +247,11 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`GL_ID`, `PHOTO_`, `TITLE_`, `WIDTH_`, `HEIGHT_`, `CATEG_ID`, `STATUS`, `USERNAME_`) VALUES
-(1, 'a1.jpg', 'x', 0, 0, 1, 1, 'nitin'),
-(2, 'a4.jpg', 'x', 0, 0, 1, 1, 'nitin'),
-(3, 'g1.jpg', 'x', 0, 0, 1, 1, 'nitin'),
-(4, 'bann.jpg', 'x', 0, 0, 1, 1, 'nitin'),
-(5, 'head1.jpg', 'x', 0, 0, 1, 1, 'nitin'),
-(6, 'head3.jpg', 'x', 0, 0, 1, 1, 'nitin');
+(7, 'air-beautiful-beauty-blue-69388_(1).jpeg', 'x', 0, 0, 1, 1, 'nitin'),
+(8, 'beautiful_lily-wallpaper-1366x768.jpg', 'x', 0, 0, 1, 1, 'nitin'),
+(9, 'beautiful_sunset_3-wallpaper-1366x768.jpg', 'x', 0, 0, 1, 1, 'nitin'),
+(10, 'green_leaf_background_197129.jpg', 'x', 0, 0, 2, 1, 'nitin'),
+(11, 'flame_5-wallpaper-1366x768.jpg', 'x', 0, 0, 2, 1, 'nitin');
 
 -- --------------------------------------------------------
 
@@ -272,7 +273,8 @@ CREATE TABLE `gallery_category` (
 --
 
 INSERT INTO `gallery_category` (`CATEG_ID`, `CATEGORY`, `DESC`, `STATUS`, `DATE_`, `PIC`) VALUES
-(1, 'General', 'General', 1, '2018-02-16 04:14:05', '');
+(1, 'General', 'General', 1, '2018-02-16 04:14:05', ''),
+(2, 'Activities', 'Activities', 1, '2018-12-25 08:33:26', '');
 
 -- --------------------------------------------------------
 
@@ -363,7 +365,8 @@ INSERT INTO `menu_1` (`ID_`, `PRE_ICON`, `MENU`, `PATH_`, `PRIORITY_`) VALUES
 (10, 'fa fa-camera fa-fw', 'Gallery', 'gallery', 8),
 (12, 'fa fa-user fa-fw', 'topers', 'topper', 10),
 (13, 'fa fa-user fa-fw', 'Downloads', 'downloads', 10),
-(14, 'fa fa-user fa-fw', 'Imp Dates', 'importantDates', 11);
+(14, 'fa fa-user fa-fw', 'Imp Dates', 'importantDates', 11),
+(15, 'fa fa-camera fa-fw', 'Offers', 'offers', 4);
 
 -- --------------------------------------------------------
 
@@ -442,7 +445,9 @@ INSERT INTO `newsevents` (`ID`, `SUBJECT`, `NEWS`, `PATH_ATTACH`, `FONTJI`, `DAT
 (4, 'Experience A Good Education In Deepti Public School', 'The true essence of a school lies, not in its infrastructure of four walls but its overall purpose of imparting quality education which includes the art of shaping individual’s personality through physical, emotional, intellectual and spiritual development.', '4.docx', 'Arial', '04/06/2018', '2018-02-16', '2018-06-30', '11:13:20pm', 1, 'nitin'),
 (5, 'Admission Open', 'Admssion Open. Please register soon', '5.docx', 'Arial', '08/05/2018', '2018-05-08', '2018-05-30', '09:30:57pm', 1, 'nitin'),
 (6, 'Hello', 'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello ', 'x', 'Arial', '04/06/2018', '2018-05-08', '2018-06-29', '11:15:57pm', 1, 'nitin'),
-(7, 'test', 'test', '7.docx', 'Arial', '28/08/2018', '2018-08-28', '2018-08-31', '03:55:42pm', 1, 'nitin');
+(7, 'test', 'test', '7.docx', 'Arial', '28/08/2018', '2018-08-28', '2018-08-31', '03:55:42pm', 1, 'nitin'),
+(8, 'WELCOME TO OUR SCHOOL', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam accumsan dolor id enim lacinia, sed feugiat ex suscipit. Nunc molestie malesuada pellentesque', 'x', 'Arial', '25/12/2018', '2018-12-25', '2018-12-31', '01:37:56pm', 1, 'nitin'),
+(9, 'Admission Open 2019', 'Admission to various classes starts at the beginning of the academic session in February/ March every year. Admission tests are held in Feb and March followed by an interview.', '9.pdf', 'Arial', '25/12/2018', '2018-12-25', '2019-05-22', '01:41:20pm', 1, 'nitin');
 
 -- --------------------------------------------------------
 
@@ -461,6 +466,34 @@ CREATE TABLE `newsletter` (
   `USERNAME_` varchar(150) NOT NULL,
   `STATUS_` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `ID` int(11) NOT NULL,
+  `SUBJECT` varchar(200) NOT NULL,
+  `OFFERS` text NOT NULL,
+  `PATH_ATTACH` varchar(150) NOT NULL,
+  `FONTJI` varchar(250) NOT NULL,
+  `DATE_` varchar(25) NOT NULL,
+  `DATE_START` varchar(25) NOT NULL,
+  `DATE_END` varchar(25) NOT NULL,
+  `TIME_` varchar(25) NOT NULL,
+  `STATUS` int(11) NOT NULL DEFAULT '1',
+  `USERNAME` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`ID`, `SUBJECT`, `OFFERS`, `PATH_ATTACH`, `FONTJI`, `DATE_`, `DATE_START`, `DATE_END`, `TIME_`, `STATUS`, `USERNAME`) VALUES
+(1, '25% off', '25% off', 'x', 'Arial', '26/12/2018', '2018-12-26', '2018-12-30', '03:23:57pm', 0, 'nitin'),
+(2, '30% off', '30% off', '2.jpg', 'Arial', '26/12/2018', '2018-12-26', '2018-12-31', '03:30:04pm', 0, 'nitin');
 
 -- --------------------------------------------------------
 
@@ -736,7 +769,8 @@ INSERT INTO `user_menu` (`ID`, `MENU`, `USER_`) VALUES
 (10, 10, 'adm'),
 (12, 12, 'adm'),
 (13, 13, 'adm'),
-(14, 14, 'adm');
+(14, 14, 'adm'),
+(15, 15, 'adm');
 
 -- --------------------------------------------------------
 
@@ -864,6 +898,12 @@ ALTER TABLE `newsletter`
   ADD KEY `USERNAME_` (`USERNAME_`);
 
 --
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tc_paths`
 --
 ALTER TABLE `tc_paths`
@@ -934,7 +974,7 @@ ALTER TABLE `bday_data`
 -- AUTO_INCREMENT for table `downloads`
 --
 ALTER TABLE `downloads`
-  MODIFY `DWNLD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `DWNLD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `faculty`
 --
@@ -944,12 +984,12 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `GL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `GL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `gallery_category`
 --
 ALTER TABLE `gallery_category`
-  MODIFY `CATEG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CATEG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `importantdates`
 --
@@ -959,7 +999,7 @@ ALTER TABLE `importantdates`
 -- AUTO_INCREMENT for table `menu_1`
 --
 ALTER TABLE `menu_1`
-  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `mynews`
 --
@@ -969,12 +1009,17 @@ ALTER TABLE `mynews`
 -- AUTO_INCREMENT for table `newsevents`
 --
 ALTER TABLE `newsevents`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
   MODIFY `NID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tc_paths`
 --
@@ -999,7 +1044,7 @@ ALTER TABLE `upcoming`
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Constraints for dumped tables
 --

@@ -10,7 +10,6 @@ class Login extends CI_Controller {
     }
 
     function index() {
-        //$data['No-USER'] = $this->session->userdata('_ADMIN_');
         $data['wallpaper_'] = "background=".base_url('_assets_/images/bg.jpg');
         $this->load->view('templates/header', $data);
         $this->load->view('login');

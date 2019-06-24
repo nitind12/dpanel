@@ -6,7 +6,7 @@
 <div class="col-lg-12">
     <div class="panel panel-default"<?php //echo $style_; ?>>
         <div class="panel-heading">
-            Feed Transfer Certificate here...
+            Feed Transfer Certificate here... [Coming Soon...]
         </div>
         <div class="panel-body">
             <div class="row">
@@ -59,7 +59,7 @@
                                     'id' => 'txtFName',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                             <div class="col-sm-4">
@@ -74,7 +74,7 @@
                                     'id' => 'txtMName',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                             <div class="col-sm-4">
@@ -89,7 +89,7 @@
                                     'id' => 'txtLName',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>  
                         </div>
@@ -110,7 +110,7 @@
                                     'id' => 'txtAdmissionDate',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                             <div class="col-sm-6">
@@ -125,7 +125,7 @@
                                     'id' => 'txtAdmissionClass',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                     'id' => 'txtLeavingDate',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                             <div class="col-sm-6">
@@ -161,7 +161,7 @@
                                     'id' => 'txtLeavingClass',
                                     'value' => ''
                                 );
-                                echo form_input($data);
+                               echo form_input($data);
                                 ?>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                             'id' => 'txtInputFileTC',
                             'value' => ''
                         );
-                        echo form_input($data);
+                       echo form_input($data);
                         ?>
                     </div>
                     <div class="form-group" style="text-align: right">

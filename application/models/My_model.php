@@ -19,7 +19,6 @@ class My_model extends CI_Model {
         } else {
             $data = array('bool_' => FALSE, 'sts_' => 'x');
         }
-
         return $data;
     }
 
