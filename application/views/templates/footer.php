@@ -17,7 +17,7 @@
 <script src="<?php echo base_url('_assets_/admin_sources/bower_components/jquery/dist/jquery-2.1.1.min.js'); ?>"></script>        
 <script src="<?php echo base_url('_assets_/admin_sources/bower_components/jquery/dist/jquery.form.min.js'); ?>"></script>
 <script src="<?php echo base_url('_assets_/admin_sources/js/adminJS.js'); ?>"></script>  
-<script type="text/javascript" src="<?php echo base_url('_assets_/js/agijs.js');?>?ver=4.3"></script>  
+<script type="text/javascript" src="<?php echo base_url('_assets_/js/agijs.js');?>?ver=6.0"></script>  
 <script>
     var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 

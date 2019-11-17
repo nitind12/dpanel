@@ -1,14 +1,23 @@
+<?php
+	if($tc_data->ORIGINAL == 1){
+		$copy__ = 'ORIGINAL';
+	} else {
+		$copy__ = 'DUPLICATE';
+	}
+	$dt_issue = explode('-',$tc_data->DATE_OF_ISSUE);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
 
-        <title>.: <?php echo _SCHOOL_; ?>: Administrative Panel</title>
+        <title>.: <?php echo _SCHOOL_; ?>: Transfer Certificate</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Administration Panel, Admin, Administrator">
+        <meta name="description" content="Transfer Certificate">
         <meta name="author" content="<?php echo _SCHOOL_;?>">
 
         <!-- Bootstrap Core CSS -->
@@ -44,6 +53,7 @@
         <style media="all">
         	body{
         		margin: 0mm 0mm;
+        		font-family: 'Times New Roman'
         	}
             .table_{
             	background: #ffffff;
@@ -69,27 +79,51 @@
             td{
             	line-height: 20px;
             }
+            .tccopy{
+            	position: absolute;
+            	float: left;
+            	z-index: 99999;
+            	border: #000090 solid 2px;
+            	padding: 2px 2px;
+            	border-radius: 0px;
+            }
+            .tcno{
+            	position: relative;
+            	text-align: left;
+            	color: #000000;
+            	z-index: 99999;
+            	padding: 0px 0px 0px 5px;
+            	border-radius: 0px;	
+            	font-family: verdana;
+            }
         </style>
     </head>
 
-    <body onload="window.print();">
+    <body onload="//window.print();">
     	<center>
     		<div class="container">
 	    		<div class="row">
 	    			<div class="col-sm-12 col-md-12 col-lg-12">
 	    				<table border="0" width="80%" height="auto" cellpadding="10" class="table_" align="center" style="background: #ffffff">
+	    				    <tr>
+	    				        <td></td>
+	    				        <td style="padding: 7px 0px 0px 0px; text-align:right; vertical-align: top">Ph.:<?php echo $school_profile['sch_contact'];?></td>
+	    				        <td></td>
+	    				    </tr>
 	    					<tr>
-	    						<td width="100">
-	    							<img src='<?php echo base_url("_assets_/logo/logo.png"); ?>?ver=1.0' width="100" / ><br>
-	    							<b>Aff. No. <?php echo $school_profile['affiliation']; ?></b>
+	    						<td width="120">
+	    							<img src='<?php echo base_url("_assets_/logo/logo.jpg"); ?>?ver=1.0' width="120" / ><br>
+	    							<b style="font-size:7px; font-family: Arial">*NOBLE IN THOUGHT AND DEED*</b>
 	    						</td>
 	    						<td align="center" class="header">
-	    							<h3><?php echo strtoupper($school_profile['sch_name']);?></h3>
-	    							<!--[<?php echo $school_profile['remark'];?>]<br>-->
-	    							<?php echo $school_profile['sch_addr'].", ".$school_profile['sch_city']." (".$school_profile['sch_distt'].")";?>, Mob.:<?php echo $school_profile['sch_contact'];?><br>
-	    							e-mail: <?php echo $school_profile['sch_email'];?>
+	    							<?php if($tc_data->ORIGINAL != 1){ ?>
+	    							<div class="tccopy"><?php echo $copy__;?></div>
+	    							<?php } ?>
+	    							<h2 style="text-align: center"><?php echo strtoupper($school_profile['sch_name']);?></h2>
+	    							<i style="font-size: 12px">(Affiliated to CBSE New Delhi: Affiliation Code No 3530334, School Code: 81562)</i><br>
+	    							<b style="font-size: 16px"><?php echo $school_profile['sch_addr'].", ".$school_profile['sch_city']." (".$school_profile['sch_distt'].")";?></b>
 	    						</td>
-	    						<td width="100">
+	    						<td width="50">
 	    						</td>
 	    					</tr>
 	    					<tr>
@@ -98,8 +132,9 @@
 	    								<tr>
 	    									<td width="100"></td>
 	    									<td align="center">
-	    										<div style="padding: 5px 0px; width: 500px; border:#000090 solid 2px; border-radius: 8px;font-size: 20px; font-weight: bold" class="col-sm-3">
-			    									स्थानांतरण प्रमाण-पत्र/ TRANSFER CERTIFICATE
+	    										<div style="padding: 5px 0px; width: 500px; font-size: 20px; font-weight: bold" class="col-sm-3">
+			    									छात्र पत्रावली तथा स्थानांतरण प्रमाण-पत्र<br>
+			    									<span style="font-size: 13px">(Scholar's Register &amp; Transfer Certificate Form)</span>
 			    								</div>
 	    									</td>
 	    									<td width="100"></td>
@@ -110,11 +145,14 @@
 	    					<tr class="content">
 	    						<td colspan="3">
 	    							<table border="0" width="100%" height="auto" cellpadding="10" class="table_" align="center" style="background: #ffffff" class="content">
+	    								
 	    								<tr>
 	    									<td>
+	    										<b class="tcno">TC. NO. - <?php echo $tc_data->TCNO;?></b>
+	    										<b class="tcno" style="float: right">Date of Issue: <u><?php echo $dt_issue[2]."-".$dt_issue[1]."-".$dt_issue[0];?></u></b><br>
 	    										विद्यालय सं0/ School No. <u><?php echo $tc_data->SCHOOL_NO;?></u><span class="gap_"></span>पुस्तक नं/ Book No. <u><?php echo $tc_data->BOOK_NO;?></u><span class="gap_"></span>क्रम सं/ S.N. <u><?php echo $tc_data->SNO;?></u><span class="gap_"></span>प्रवेश सं/ Admission No. <u><?php echo $tc_data->ADMISSION_NO;?></u><span class="gap_"></span>
 	    										<br>
-	    										Affiliation No. <u><?php echo $tc_data->AFFILIATION_NO;?></u><span class="gap_"></span> 
+	    										Affiliation No. <u><?php echo $tc_data->AFFILIATION_NO;?></u><span class="gap_"></span><span class="gap_"></span>Renewed upto <u><?php echo $tc_data->RENEWED_UPTO;?></u><span class="gap_"></span>Status of School <u><?php echo $tc_data->SCHOOL_STATUS;?></u>
 	    										<br>
 	    										Registration No. of Candidate (in case Class - IX to XII) <u><?php echo $tc_data->REGNO_OF_CANDIDATE;?></u>
 	    									</td>
@@ -122,7 +160,7 @@
 	    								<tr>
 	    									<td>
 	    										<ol>
-	    											<li>विद्यार्थी का पूरा नाम/ Name of Pupil: <u><?php echo ucwords($tc_data->CANDIDATE_NAME);?></u></li>
+	    											<li>विद्यार्थी का नाम/ Name of Pupil: <u><?php echo ucwords($tc_data->CANDIDATE_NAME);?></u></li>
 
 	    											<li>माता का नाम/ Mother's Name: <u><?php echo ucwords($tc_data->MOTHERS_NAME);?></u></li>
 	    											

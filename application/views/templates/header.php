@@ -28,7 +28,7 @@
 
         <!-- Custom Fonts -->
         <link href="<?php echo base_url('_assets_/admin_sources/bower_components/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
-        <link href="<?php echo base_url('_assets_/css/mycss.css'); ?>" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('_assets_/css/mystyle.css'); ?>" rel="stylesheet" type="text/css">
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

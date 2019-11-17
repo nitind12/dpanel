@@ -15,8 +15,7 @@
     }
 </style>
 <?php 
-    $year_session = array('2016', '2017', '2018', '2019');
-    //$year_session = array('2016-17', '2017-18', '2018-19', '2019-20');
+    $year_session = array('2016-17', '2017-18', '2018-19', '2019-20');
 ?>
 <div class="col-lg-12">
     <div class="panel panel-default">
@@ -25,7 +24,7 @@
                 Upload TC Data Classwise
             </div>
             <div class="col-sm-6" style="text-align: right">
-                <a href="<?php echo base_url('_assets_/tc.xlsx');?>?ver=1.2" style="color: #009000; font-weight: bold; font-size: 13px">Download <img src="<?php echo base_url('_assets_/images/xls.png');?>?ver=1.1" width="30"></a>
+                <a href="<?php echo base_url('_assets_/tc.xlsx');?>?ver=1.1" style="color: #009000; font-weight: bold; font-size: 13px">Download <img src="<?php echo base_url('_assets_/images/xls.png');?>?ver=1.1" width="30"></a>
             </div>
         </div>
         <div class="panel-body">
@@ -54,7 +53,29 @@
                         ?>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Select Class<sup>*</sup></label>
+                        <?php
+                        $data = array(
+                            'type' => 'text',
+                            'autocomplete' => 'off',
+                            'required' => 'required',
+                            'placeholder' => 'Select Class',
+                            'class' => 'required form-control',
+                            'name' => 'txtClass',
+                            'id' => 'txtClass',
+                            'value' => ''
+                        );
+                        $options[''] = "Class";
+                        foreach($classes as $item){
+                            $options[$item] = $item;
+                        }
+                        echo form_dropdown($data, $options, '');
+                        ?>
+                    </div>
+                </div>
+                <div class="col-sm-4">
                     <label class="control-label">Select Excel</label>
                     <?php
                     $data = array(
@@ -79,24 +100,6 @@
                     <input type="reset" value="Cancel" class="form-control btn btn-danger" name="cmbReset" id="cmbReset">
                 </div>
                 <?php echo form_close();?>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2" style="border: #808080 dotted 1px; padding: 10px">
-                    <label class="control-label">Enter T.C. No.</label>
-                    <?php
-                    $data = array(
-                        'type' => 'text',
-                        'class' => "form-control",
-                        
-                        'placeholder' => 'TC No.',
-                        'autocomplete' => 'off',
-                        'required' => 'required',
-                        'name' => 'txtTCNoForCancelation',
-                        'id' => 'txtTCNoForCancelation'
-                    );
-                    echo form_input($data);
-                    ?>
-                    <input type="submit" value="Cancel TC" class="form-control btn btn-danger" name="cmbCancelTC" id="cmbCancelTC">
-                </div>
             </div>
         </div>
     </div>
@@ -213,8 +216,8 @@
                 <div class="col-sm-6" style="text-align: right; color: #0000ff">| <a href="#" id="reloadData"><b>reload</b></a> |</div>
             </div>
         </div>
-
         <div class="panel-body" id="view_tc_data" style="overflow: scroll; height: auto">
+
         </div>
     </div>
 </div>
